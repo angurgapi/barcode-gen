@@ -2,7 +2,7 @@
   <div class="input-wrapper">
     <span class="input-wrapper__label">{{ label }}</span>
     <input
-      v-model.number="modelValue"
+      v-model="modelValue"
       type="text"
       :maxlength="maxLength"
       class="input-wrapper__input"
@@ -10,6 +10,9 @@
     >
     <span v-if="postfix" class="input-wrapper__postfix">{{ postfix }}</span>
     <span v-if="error" class="input-wrapper__warning">{{ errorText }}</span>
+    <button v-if="isClearable && modelValue" class="btn input-wrapper__clear" @click="clearInput">
+      <svg-icon name="clear" height="18" width="18" />
+    </button>
   </div>
 </template>
 
@@ -21,16 +24,22 @@ export default class NumericInput extends Vue {
   @Prop({ default: '' }) readonly label?: string
   @Prop({ default: '' }) readonly postfix?: string
   @Prop({ default: 14 }) readonly maxLength?: number
+  @Prop({ default: false }) readonly error?: boolean
+  @Prop({ default: false }) readonly isClearable?: boolean
 
   modelValue = ''
-  error = false
-  errorText = 'Please, remove all non-digital characters'
+  errorText = 'Barcode content must not be empty'
 
     @Watch('modelValue')
-  onInput () {
-    this.error = this.modelValue !== '' && !/^\d*\.?\d*$/.test(this.modelValue)
+  onInput (value) {
+    const sanitizedValue = value.toString().replace(/\D/g, '')
+    this.modelValue = sanitizedValue
     this.$emit('input', this.modelValue)
   }
+
+    clearInput () {
+      this.modelValue = ''
+    }
 }
 </script>
 
@@ -78,6 +87,18 @@ export default class NumericInput extends Vue {
         color: #7a311c;
         font-size: 12px;
         margin-top: 5px;
+    }
+
+    &__clear {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      position: absolute;
+      right: 12px;
+      top: 18px;
+      svg {
+        margin: 0;
+      }
     }
 
 }

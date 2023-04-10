@@ -11,7 +11,7 @@
         width="16"
         name="chevron-down"
         class="dropdown__arrow"
-        :class="{'dropdown__arrow--rotate': isOpen}"
+        :class="{'dropdown__arrow--rotated': isOpen}"
       />
     </button>
 
@@ -86,6 +86,10 @@ import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
 
     &__arrow {
         fill: #000;
+        transition: .4s all ease-in-out;
+        &--rotated {
+          transform: rotate(180deg);
+        }
     }
 
     &__label {

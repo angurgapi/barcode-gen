@@ -4,9 +4,27 @@
       Free barcode generator
     </h1>
     <div class="page__content">
-      <BarCodeGen />
+      <BarCodeGen @generated="renderPreview" />
       <div class="preview card">
-        <span>blob</span>
+        <span class="preview__title">Result</span>
+        <template v-if="isGenerated">
+          <img class="preview__img" :src="previewUrl" alt="barcode">
+
+          <a :href="downloadUrl" download>
+            <button class="btn btn--default preview__btn">
+              <svg-icon name="download" height="16" width="16" />
+              Download
+            </button>
+          </a>
+        </template>
+        <template v-else>
+          <div class="preview__placeholder f-col">
+            <svg-icon name="image-landscape" height="30" width="30" />
+            <span class="preview__hint">
+              Your barcode will be rendered here
+            </span>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -22,17 +40,14 @@ import BarcodeGenerator from '~/components/BarCodeGen.vue'
 })
 
 export default class Index extends Vue {
-  formData = {
-    content: ''
-  }
+  previewUrl = ''
+  downloadUrl = ''
+  isGenerated = false
 
-  async generate () {
-    try {
-      const response = await this.$axios.get('/api/image.jpeg?BarcodeType=Codabar&Content=4815162342')
-      console.log(response)
-    } catch (e) {
-      console.log(e)
-    }
+  renderPreview (image:string, downloadPath: string) {
+    this.isGenerated = true
+    this.previewUrl = image
+    this.downloadUrl = 'https://api.products.aspose.app' + downloadPath
   }
 }
 </script>
@@ -46,7 +61,36 @@ export default class Index extends Vue {
     margin-left: 0;
     margin-top: 30px;
     // width: 100%;
+  }
 
+  &__title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  &__hint{
+    font-size: 14px;
+    color: #383838;
+    max-width: 250px;
+  }
+  &__img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px dashed rgba(0,0,0,.2);
+  }
+
+  &__btn {
+    margin-top: 20px;
+  }
+
+  &__placeholder {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-bottom: 30px;
+    }
   }
 }
 </style>

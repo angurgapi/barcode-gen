@@ -2,28 +2,28 @@
   <div class="size-selector f-col">
     <div class="size-selector__buttons">
       <button
-        class="size-selector__btn"
+        class="btn size-selector__btn"
         :class="{'size-selector__btn--active': currentSize === 'small'}"
         @click="selectSize('small')"
       >
         small
       </button>
       <button
-        class="size-selector__btn"
+        class="btn size-selector__btn"
         :class="{'size-selector__btn--active': currentSize === 'medium'}"
         @click="selectSize('medium')"
       >
         medium
       </button>
       <button
-        class="size-selector__btn"
+        class="btn size-selector__btn"
         :class="{'size-selector__btn--active': currentSize === 'large'}"
         @click="selectSize('large')"
       >
         large
       </button>
       <button
-        class="size-selector__btn"
+        class="btn size-selector__btn"
         :class="{'size-selector__btn--active': currentSize === 'custom'}"
         @click="selectSize('custom')"
       >
@@ -49,9 +49,9 @@ export default class SizeSelector extends Vue {
   customDimensions = [0, 0]
 
   sizeModes = {
-    small: [60, 140],
-    medium: [80, 200],
-    large: [100, 300]
+    small: [150, 30],
+    medium: [200, 60],
+    large: [400, 100]
   }
 
   @Watch('customDimensions', { deep: true })

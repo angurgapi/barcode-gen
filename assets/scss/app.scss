@@ -7,6 +7,11 @@ html, body {
     height: 100%;
     font-family: 'Rubik';
 }
+
+a {
+    text-decoration: none;
+    color: #000;
+}
 div {
     box-sizing: border-box;
 }
@@ -58,8 +63,18 @@ div {
     background-color: #fff;
     display: flex;
     justify-content: center;
+    border-radius: 5px;
+    height: 42px;
     align-items: center;
+    cursor: pointer;
+    transition: .4s all ease-in-out;
     svg {
-        margin-left: 10px;
+        margin-right: 10px;
+    }
+    &--default {
+        border: 2px solid #000;
+        &:hover {
+            background: rgba(0,0,0,.2);
+          }
     }
 }
