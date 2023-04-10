@@ -14,7 +14,10 @@ div {
     display: flex;
     flex-direction: column;
 }
-
+.f-row {
+    display: flex;
+    align-items: center;
+}
 .page {
     display: flex;
     flex-direction: column;

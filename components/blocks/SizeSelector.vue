@@ -30,9 +30,9 @@
         custom
       </button>
     </div>
-    <div v-show="currentSize === 'custom'" class="size-selector__inputs">    
-        <NumericInput max-length="4" v-model="customDimensions[0]" label="width" postfix="px" />  
-        <NumericInput max-length="4" v-model="customDimensions[1]" label="height" postfix="px" />  
+    <div v-show="currentSize === 'custom'" class="size-selector__inputs">
+      <NumericInput v-model="customDimensions[0]" max-length="4" label="width" postfix="px" />
+      <NumericInput v-model="customDimensions[1]" max-length="4" label="height" postfix="px" />
     </div>
   </div>
 </template>
@@ -54,12 +54,12 @@ export default class SizeSelector extends Vue {
     large: [100, 300]
   }
 
-  @Watch('customDimensions', {deep: true})
-  onInput() {
+  @Watch('customDimensions', { deep: true })
+  onInput () {
     this.$emit('input', ...this.dimensions)
   }
 
-  get dimensions(): number[] {
+  get dimensions (): number[] {
     return this.currentSize === 'custom' ? this.customDimensions : this.sizeModes[this.currentSize]
   }
 
@@ -73,7 +73,6 @@ export default class SizeSelector extends Vue {
 
 <style lang="scss" scoped>
 .size-selector {
-    margin-top: 16px;
     max-width: 100%;
     width: 100%;
     &__buttons {
@@ -81,13 +80,11 @@ export default class SizeSelector extends Vue {
     width: 100%;
     display: grid;
     grid-gap: 12px;
-    grid-template-columns: repeat(4, 1fr);
-    @media(max-width: 400px){
-      grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(2, 1fr);
     }
 
     &__btn {
+      cursor: pointer;
         height: 48px;
         border-radius: 8px;
         background: #FFFADE;

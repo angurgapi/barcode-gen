@@ -41,7 +41,8 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'https://products.aspose.app/barcode/embed',
+      // target: 'https://products.aspose.app/barcode/embed',
+      target: 'https://api.products.aspose.app/barcode/generate',
       pathRewrite: { '^/api/': '' }
     }
   },
