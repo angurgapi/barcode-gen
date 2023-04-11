@@ -4,7 +4,7 @@
       Free barcode generator
     </h1>
     <div class="page__content">
-      <BarCodeGen @generated="renderPreview" />
+      <BarCodeGen @generated="renderPreview" @error="onError" />
       <div class="preview card">
         <span class="preview__title">Result</span>
         <template v-if="isGenerated">
@@ -18,12 +18,22 @@
           </a>
         </template>
         <template v-else>
-          <div class="preview__placeholder f-col">
-            <svg-icon name="image-landscape" height="30" width="30" />
-            <span class="preview__hint">
-              Your barcode will be rendered here
-            </span>
-          </div>
+          <template v-if="error">
+            <div class="preview__placeholder f-col">
+              <svg-icon name="error" height="30" width="30" />
+              <span class="error">
+                {{ errorMessage }}
+              </span>
+            </div>
+          </template>
+          <template v-else>
+            <div class="preview__placeholder f-col">
+              <svg-icon name="image-landscape" height="30" width="30" />
+              <span class="preview__hint">
+                Your barcode will be rendered here
+              </span>
+            </div>
+          </template>
         </template>
       </div>
     </div>
@@ -43,11 +53,20 @@ export default class Index extends Vue {
   previewUrl = ''
   downloadUrl = ''
   isGenerated = false
+  error = false
+  errorMessage = ''
 
   renderPreview (image:string, downloadPath: string) {
     this.isGenerated = true
+    this.error = false
     this.previewUrl = image
     this.downloadUrl = 'https://api.products.aspose.app' + downloadPath
+  }
+
+  onError (msg) {
+    this.isGenerated = false
+    this.error = true
+    this.errorMessage = msg
   }
 }
 </script>

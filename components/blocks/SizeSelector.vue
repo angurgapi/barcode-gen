@@ -31,18 +31,18 @@
       </button>
     </div>
     <div v-show="currentSize === 'custom'" class="size-selector__inputs">
-      <NumericInput v-model="customDimensions[0]" max-length="4" label="width" postfix="px" />
-      <NumericInput v-model="customDimensions[1]" max-length="4" label="height" postfix="px" />
+      <CustomInput v-model="customDimensions[0]" type="number" max-length="4" label="width" postfix="px" />
+      <CustomInput v-model="customDimensions[1]" type="number" max-length="4" label="height" postfix="px" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator'
-import NumericInput from '@/components/blocks/NumericInput.vue'
+import CustomInput from '@/components/blocks/CustomInput.vue'
 
 @Component({
-  components: { NumericInput }
+  components: { CustomInput }
 })
 export default class SizeSelector extends Vue {
   currentSize = 'small'

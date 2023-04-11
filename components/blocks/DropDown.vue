@@ -63,7 +63,7 @@ import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
     display: flex;
     align-items: center;
     width: fit-content;
-    text-transform: uppercase;
+    background:#fff;
 
     &__button, &__content {
       background:#fff;
@@ -77,7 +77,6 @@ import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
       display: flex;
       align-items: center;
       justify-content: space-between;
-      text-transform: uppercase;
       cursor: pointer;
       padding: 6px 21px 6px 12px;
       border: none;
@@ -104,7 +103,7 @@ import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
       flex-direction: column;
       z-index: 20;
       top: 50px;
-      padding: 16px 24px;
+      padding: 0;
       width: 100%;
     }
 
@@ -112,6 +111,10 @@ import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
         cursor: pointer;
         height: 30px;
         opacity: .8;
+        padding: 6px;
+        &:not(:first-child){
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
         &:hover {
             opacity: 1;
         }

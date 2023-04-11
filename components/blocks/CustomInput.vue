@@ -20,9 +20,10 @@
 import { Component, Vue, Watch, Prop } from 'nuxt-property-decorator'
 @Component
 
-export default class NumericInput extends Vue {
+export default class CustomInput extends Vue {
   @Prop({ default: '' }) readonly label?: string
   @Prop({ default: '' }) readonly postfix?: string
+  @Prop({ default: 'number' }) readonly type?: string
   @Prop({ default: 14 }) readonly maxLength?: number
   @Prop({ default: false }) readonly error?: boolean
   @Prop({ default: false }) readonly isClearable?: boolean
@@ -32,8 +33,10 @@ export default class NumericInput extends Vue {
 
     @Watch('modelValue')
   onInput (value) {
-    const sanitizedValue = value.toString().replace(/\D/g, '')
-    this.modelValue = sanitizedValue
+    if (this.type === 'number') {
+      const sanitizedValue = value.toString().replace(/\D/g, '')
+      this.modelValue = sanitizedValue
+    }
     this.$emit('input', this.modelValue)
   }
 
