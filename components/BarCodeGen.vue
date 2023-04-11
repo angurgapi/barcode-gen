@@ -21,11 +21,8 @@
         </div>
         <div class="mode-selector f-row">
           <span class="mode-selector__label">show code text</span>
-          <div
-            class="custom-checkbox"
-          >
+          <div class="custom-checkbox">
             <label class="custom-checkbox__container">
-
               <input
                 v-model="formData.showCodeText"
                 class="custom-checkbox__input"
@@ -100,10 +97,6 @@ export default class BarcodeGenerator extends Vue {
       label: 'Pharmacode'
     }
   ]
-
-  // rules = {
-  //   DatabarExpanded: 
-  // }
 
   formData = {
     filetype: 'jpeg',

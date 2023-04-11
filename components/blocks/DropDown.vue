@@ -1,5 +1,12 @@
 <template>
-  <div class="dropdown">
+  <div
+    v-click-outside="
+      () => {
+        isOpen = false
+      }
+    "
+    class="dropdown"
+  >
     <button
       class="dropdown__button"
       :class="{'dropdown__button--rotate': isOpen}"
@@ -34,21 +41,21 @@
 import {
   Component, Prop, Vue
 } from 'vue-property-decorator'
-import {FormatOptionInterface} from '@/utils/interfaces/FormatOptionInterface'
+import { DropdownOptionInterface } from '@/utils/interfaces/DropdownOptionInterface'
 
     @Component
-    export default class DropDown extends Vue {
-        @Prop({ default: () => [] }) readonly options!: FormatOptionInterface[]
+export default class DropDown extends Vue {
+        @Prop({ default: () => [] }) readonly options!: DropdownOptionInterface[]
         @Prop({ default: '' }) readonly name?: string
 
         isOpen = false
-        selectedOption:FormatOptionInterface = this.options[0]
+        selectedOption:DropdownOptionInterface = this.options[0]
 
         get label (): string {
           return this.selectedOption.label || 'label'
         }
 
-        selectOption (option:FormatOptionInterface) {
+        selectOption (option:DropdownOptionInterface) {
           this.selectedOption = option
           this.$emit('input', this.selectedOption.value)
           this.isOpen = false
