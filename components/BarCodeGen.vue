@@ -146,7 +146,7 @@ export default class BarcodeGenerator extends Vue {
         } else {
           this.$emit('error', data.errorMsg)
         }
-      } catch (e) { console.log(e) }
+      } catch (e) { this.$emit('error', e) }
     } else {
       this.contentError = true
     }
