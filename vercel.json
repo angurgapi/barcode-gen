@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/",
-      "destination": "https://api.products.aspose.app/barcode/generate"
+      "source": "/api/:path(.*)",
+      "destination": "https://api.products.aspose.app/barcode/generate/:path"
     }
   ]
 }
